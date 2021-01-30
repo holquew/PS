@@ -1,0 +1,17 @@
+x = int(input())
+dp = [0 for _ in range(x + 1)]
+
+for i in range(1, x+1):
+    if i == 1:
+        continue
+    temps = []
+
+    temps.append(dp[i-1] + 1)
+    if i % 3 == 0:
+        temps.append(dp[i//3] + 1)
+    if i % 2 == 0:
+        temps.append(dp[i//2] + 1)
+    
+    dp[i] = min(temps)
+
+print(dp[x])

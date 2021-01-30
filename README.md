@@ -1,1 +1,1 @@
-# Algo_practice
+# 코테 준비
