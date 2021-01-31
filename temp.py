@@ -1,3 +1,23 @@
+n, m, k = map(int, input().split())
+a = list(map(int, input().split()))
+
+a.sort(reverse=True)
+first = a[0]
+second = a[1]
+partial_sum = first * k + second
+
+answer = partial_sum * (m // (k+1)) + first * (m % (k+1))
+print(answer)
+
+
+# from itertools import product
+
+# data = ['A', 'B', 'C']
+# result = list(product(data, repeat=2))
+
+# print(result)
+
+
 # n = int(input())
 
 # if n % 2 == 0:
