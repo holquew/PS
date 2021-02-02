@@ -1,22 +1,22 @@
+import sys
 from collections import deque
 
-t = int(input())
+t = int(sys.stdin.readline().rstrip())
 for _ in range(t):
-    n, m = map(int, input().split())
-    q = deque(map(int, input().split()))
-    index = [x for x in range(len(q))]
-        
+    n, m = map(int, sys.stdin.readline().split())
+    q = deque(map(int, sys.stdin.readline().split()))
 
     count = 0
     while q:
         highest = max(q)
-        paper = q.popleft()
-
-        if paper == find:
-            print('count ',  count)
-            break
-
-        if paper == highest:
-            q.popleft()
+        doc = q.popleft()
+        m -= 1
+        if doc != highest:
+            q.append(doc)
+            if m < 0:
+                m = len(q) - 1
         else:
-            q.append(paper)
+            count += 1
+            if m < 0:
+                print(count)
+                break
