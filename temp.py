@@ -1,13 +1,25 @@
-n, m, k = map(int, input().split())
-a = list(map(int, input().split()))
+import sys
+from itertools import permutations
+input = sys.stdin.readline
 
-a.sort(reverse=True)
-first = a[0]
-second = a[1]
-partial_sum = first * k + second
+n, m = map(int, input().split())
 
-answer = partial_sum * (m // (k+1)) + first * (m % (k+1))
-print(answer)
+nums = [x for x in range(1, n+1)]
+permute = list(permutations(['a', 'b', 'c'], 3))
+for p in permute: 
+    print(' '.join(map(str, p)))
+
+
+# n, m, k = map(int, input().split())
+# a = list(map(int, input().split()))
+
+# a.sort(reverse=True)
+# first = a[0]
+# second = a[1]
+# partial_sum = first * k + second
+
+# answer = partial_sum * (m // (k+1)) + first * (m % (k+1))
+# print(answer)
 
 
 # from itertools import product
