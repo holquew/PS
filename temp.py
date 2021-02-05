@@ -1,12 +1,12 @@
 import sys
-from itertools import permutations
+from itertools import combinations
 input = sys.stdin.readline
 
 n, m = map(int, input().split())
 
 nums = [x for x in range(1, n+1)]
-permute = list(permutations(['a', 'b', 'c'], 3))
-for p in permute: 
+comb = list(combinations(nums, m))
+for p in comb:
     print(' '.join(map(str, p)))
 
 
