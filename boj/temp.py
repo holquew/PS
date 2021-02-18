@@ -1,14 +1,14 @@
-N = int(input())
-
-for i in range(1, N):
-    for j in range(N - i):
-        print(" ", end="")
-    print("*", end="")
-    for h in range(2 * (i - 1) - 1):
-        print(" ", end="")
-    if i != 1:
-        print("*", end="")
-    print()
-
-for a in range(2 * N - 1):
-    print("*", end="")
+while True:
+    try:
+        n = int(input())
+        remainder = 0
+        count = 0
+        while True:
+            count += 1
+            remainder = remainder * 10 + 1
+            remainder %= n
+            if remainder == 0:
+                print(count)
+                break
+    except:
+        break
