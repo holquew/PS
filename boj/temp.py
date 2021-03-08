@@ -1,14 +1,27 @@
 import sys
 input = sys.stdin.readline
 
-while True: 
-    a = list(input().rstrip())
-    if a[0] == '0': 
-        break
+a = list(map(int, input().split()))
+
+def ascending(a):
+    for i in range(1, len(a)): 
+        if a[i-1] > a[i]: 
+            print('mixed')
+            return
     
-    for i in range(len(a) // 2): 
-        if a[i] != a[len(a) - i -1]: 
-            print('no')
-            break
-        
-    else: print('yes')
+    print('ascending')
+
+
+def descending(a): 
+    for i in range(1, len(a)): 
+        if a[i-1] < a[i]: 
+            print('mixed')
+            return 
+    
+    print('descending')
+
+if a[0] < a[1]: 
+    ascending(a)
+else: 
+    descending(a)
+
