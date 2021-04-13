@@ -1,1 +1,2 @@
-print(a)
+
+                field_dict[cell] = []
