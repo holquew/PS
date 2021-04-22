@@ -15,12 +15,6 @@ for i in graph:
     i.sort()
 
 
-def dfs(node, visited):
-    visited[node] = True
-    print(node, end=' ')
-    for i in graph[node]:
-        if not visited[i]:
-            dfs(i, visited)
 
 def dfs(start, visited):
     stack = [start]
@@ -49,6 +43,13 @@ def bfs(start, visited):
                 queue.append(i)
                 visited[i] = True
 
+
+def dfs(node, visited):
+    visited[node] = True
+    print(node, end=' ')
+    for i in graph[node]:
+        if not visited[i]:
+            dfs(i, visited)
 
 dfs(v, visited1)
 print()
