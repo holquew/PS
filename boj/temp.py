@@ -1,22 +1,20 @@
-import sys
-input = sys.stdin.readline
+def solution(n, lost, reserve):
+    new_lost = set(lost) - set(reserve)
+    new_reserve = set(reserve) - set(lost)
+    answer = n - len(new_lost)
 
-n, m = map(int, input().split())
-
-c = [False for _ in range(10)]
-a = [0 for _ in range(10)]
-def go(index, start, n, m): 
-    if index == m: 
-        print(' '.join(map(str,a[:m])))
-        return
+    for l in new_lost: 
+        if l-1 in new_reserve: 
+            answer += 1
+            new_reserve.remove(l-1)
+        elif l+1 in new_reserve: 
+            answer += 1 
+            new_reserve.remove(l+1)
     
-    for i in range(start, n+1): 
-        # if c[i]: 
-        #     continue
+    return answer
 
-        c[i] = True
-        a[index] = i
-        go(index + 1, i, n, m)
-        c[i] = False
-
-go(0, 1, n, m)
+print(
+    solution(
+        5, [1, 2, 3], [2, 3, 4]
+    )
+)
