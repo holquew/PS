@@ -1,51 +1,56 @@
-import sys
-input = sys.stdin.readline
+from collections import deque
+import heapq
 
-n = int(input())
-a = [list(input().rstrip()) for _ in range(n)]
+# def solution(board):
+#     answer = 0
+#     n = len(board[0])
 
+#     dr = [0, 1, 0, -1]
+#     dc = [1, 0, -1, 0]
+#     def bfs():
+#         dp = [[None] * n for _ in range(n)]
+#         dp[0][0] = 0
+#         q = [(0, None, 0, 0)]
+#         heapq.heapify(q)
+#         while q:
+#             cost, direction, r, c = q.pop(0)
+#             for i in range(len(dr)):
+#                 nr, nc = r + dr[i], c + dc[i]
+#                 if 0 <= nr < n and 0 <= nc < n and board[nr][nc] == 0:
+#                     if dp[nr][nc] == None:
+#                         new_cost = cost + (100 if direction == None or i == direction else 600)
+#                         heapq.heappush(q, (new_cost, i, nr, nc))
+#                         dp[nr][nc] = new_cost
+#         for i in dp: 
+#             print(i)
+#         return dp[n-1][n-1]
 
-def check(board): 
-    answer = 1
-    for r in range(n): 
-        count = 1 
-        for c in range(1, n): 
-            if board[r][c] == board[r][c-1]: 
-                count += 1
-            else: 
-                count = 1
-            
-            if count > answer: 
-                answer = count
+#     return bfs() 
 
-    for c in range(n): 
-        count = 1
-        for r in range(1, n): 
-            if board[r][c] == board[r-1][c]: 
-                count += 1 
-            else: 
-                count = 1
-            
-            if count > answer: 
-                answer = count
-    
-    return answer
+def solution(board):
+    answer = 0
+    n = len(board[0])
 
-answer = 0
-for r in range(n): 
-    for c in range(n): 
-        if c+1 < n: 
-            a[r][c], a[r][c+1] = a[r][c+1], a[r][c]
-            temp = check(a)
-            if temp > answer: 
-                answer = temp
-            a[r][c], a[r][c+1] = a[r][c+1], a[r][c]
+    dr = [0, 1, 0, -1]
+    dc = [1, 0, -1, 0]
+    def bfs():
+        visited = [[None] * n for _ in range(n)]
+        visited[0][0] = 0
+        q = deque([(0, 0, 0, 0), (1, 0, 0, 0)])
+        while q:
+            direction, cost, r, c = q.popleft()
+            for i in range(len(dr)):
+                nr, nc = r + dr[i], c + dc[i]
+                if 0 <= nr < n and 0 <= nc < n and board[nr][nc] == 0:
+                    new_cost = cost + (100 if i == direction else 600)
+                    if not visited[nr][nc] or visited[nr][nc] >= new_cost:
+                        q.append((i, new_cost, nr, nc))
+                        visited[nr][nc] = new_cost
         
-        if r+1 < n: 
-            a[r][c], a[r+1][c] = a[r+1][c], a[r][c]
-            temp = check(a)
-            if temp > answer: 
-                answer = temp
-            a[r][c], a[r+1][c] = a[r+1][c], a[r][c]
+        return visited[n-1][n-1]
 
-print(answer)
+    return bfs()    
+
+print(
+    solution([[0,0,1,0],[0,0,0,0],[0,1,0,1],[1,0,0,0]])
+)

@@ -1,3 +1,4 @@
+'''부등호'''
 import sys
 input = sys.stdin.readline
 
