@@ -1,50 +1,12 @@
-
-
-function solution(n, passenger, train) {
-    let answer = [];
-    let dp = new Array(n).fill(0);
-    for (let i = 0; i < n; i++) {
-        dp[i] = passenger[i];
+function check(arr, leaveCount) {
+    let jump = 0; 
+    let leng = arr.length; 
+    for (let i = 1; i < leng; i++) {
+        jump += arr[i] - arr[i-1] - 1; 
     }
-    let graph = {};
-    for (let i = 0; i < train.length; i++) {
-        [a, b] = train[i];
-        if (graph[a]) {
-            graph[a].push(b);
-        } else {
-            graph[a] = [b];
-        }
-
-        if (graph[b]) {
-            graph[b].push(a);
-        } else {
-            graph[b] = [a];
-        }
+    if (jump === leaveCount) {
+        return arr[leng-1] - arr[0] + 1; 
     }
-    let visited = new Array(n).fill(false);
-    const dfs = (start, visited) => {
-        visited[start] = true;
-        graph[start].forEach(node => {
-            if (!visited[node]) {
-                dp[start] += dfs(node, visited);
-            }
-        })
-        
-        return dp[start];
-    }
-    
-    dfs('1', visited);
-    console.log(dp);
-
-
-    return answer;
 }
 
-
-console.log(
-    solution(
-        6,
-       [1,1,1,1,1,1], 
-       [[1,2],[1,3],[1,4],[3,5],[3,6]]
-    )
-)
+console.log(check([1, 2, 6, 7, 8], 3));

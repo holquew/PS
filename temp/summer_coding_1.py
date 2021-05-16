@@ -1,6 +1,7 @@
 import re
 from collections import defaultdict
 
+
 def solution(code, day, data):
     answer = []
     n = len(data)
@@ -13,11 +14,10 @@ def solution(code, day, data):
         time_info = re.findall("\d+", d[2])[0]
         infos[code_num].append((time_info[:8], time_info[8:], price_info))
 
-    
     for info in infos[code]:
         if info[0].startswith(day):
             answer.append((info[1], info[2]))
-    
+
     answer = [x[1] for x in sorted(answer)]
     return answer
 
